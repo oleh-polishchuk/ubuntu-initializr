@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubuntu Initializr</title>
+    <link href="//fonts.googleapis.com/css?family=Varela+Round|Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="https://assets.ubuntu.com/v1/cb22ba5d-favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Dependencies -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <!-- Application -->
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
+</head>
+<body ng-app="app" ng-controller="HomeController as vm">
+
+<header class="start-header">
+    <div class="container">
+        <h2>Ubuntu Initializr
+            <small>bootstrap your ubuntu now</small>
+        </h2>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2><label>Generate a bash-script with embedded installers</label></h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h2>Script metadata</h2>
+            <p>Note! *.sh extension will be added automatically</p>
+            <div class="form-group">
+                <label for="file-name">File name</label>
+                <input type="text" id="file-name" class="form-control" ng-model="vm.fileName"
+                       placeholder="ex. install.sh">
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <h2>Installers</h2>
+            <p>Add installers to your Ubuntu</p>
+            <div class="form-group">
+                <label>Check for installers</label>
+                <form class="form-inline">
+                    <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers">
+                        <label><input type="checkbox" ng-model="installer.checked"> {{installer.name}}</label>
+                    </div>
+                </form>
+            </div>
+            <div class="form-group">
+                <label>Added installers</label>
+                <div id="installers">
+                    <div class="tag" ng-repeat="installer in vm.getChecked(vm.installers) track by $index">
+                        {{installer.name}}
+                        <button type="button" class="close" aria-label="Close"
+                                ng-click="vm.uncheck(installer)">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-center">
+                    <button type="submit" id="generate-script" class="btn btn-success btn-lg"
+                            ng-disabled="!vm.isSomeChecked(vm.installers)"
+                            ng-click="vm.generateScript(vm.installers)">
+                        Generate Script
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="start-footer">
+    <div class="container">
+        <p>Copyright © 2017 Oleh Polishchuk, All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
