@@ -13,6 +13,6 @@ app.use('/api', api);
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(express.static(path.resolve(__dirname, 'views')));
 
-app.listen(8080, () => {
-    console.log('Application listening on port 8080!')
+app.listen(80, () => {
+    console.log('Application listening on port 80!')
 });
