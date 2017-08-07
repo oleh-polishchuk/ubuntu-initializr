@@ -8,7 +8,7 @@
 
     HomeControllerClass.$inject = ['$http', '$window'];
     function HomeControllerClass($http, $window) {
-        let vm = this;
+        var vm = this;
 
         vm.fileName = 'install';
         vm.installers = [];
@@ -25,7 +25,7 @@
         ////
 
         function activate() {
-            vm.getInstallers(() => {
+            vm.getInstallers(function () {
                 vm.checkFirst(vm.installers);
             });
         }
@@ -34,7 +34,7 @@
          * Installers
          */
         function getInstallers(next) {
-            $http.get('/api/installer/all').then((res) => {
+            $http.get('/api/installer/all').then(function (res) {
                 vm.installers = res.data;
                 next()
             })
@@ -48,7 +48,7 @@
         }
 
         function getIDs() {
-            return vm.getChecked(vm.installers).reduce((ids, elem) => {
+            return vm.getChecked(vm.installers).reduce(function (ids, elem) {
                 return ids + '&id=' + elem.id
             }, '');
         }
@@ -74,7 +74,7 @@
         function isSomeChecked(list) {
             if (!Array.isArray(list)) return false;
 
-            return list.filter((elem) => {
+            return list.filter(function (elem) {
                 return elem.checked
             }).length;
         }
