@@ -87,6 +87,61 @@ let installers = [
             'apt-get install -y maven3',
         ]
     },
+    {
+        id: 11,
+        name: 'Wine',
+        cmds: [
+            'apt-get install -y wine',
+        ]
+    },
+    {
+        id: 12,
+        name: 'MySQL',
+        cmds: [
+            'apt-get update -y',
+            'apt-get install -y mysql-server',
+            'mysql_secure_installation',
+            'systemctl status mysql.service',
+        ]
+    },
+    {
+        id: 13,
+        name: 'MongoDB',
+        cmds: [
+            'apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927',
+            'echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list',
+            'apt-get update -y',
+            'apt-get install -y mongodb-org',
+            'xdg-open https://www.digitalocean.com/community/tutorials/mongodb-ubuntu-16-04-ru',
+        ]
+    },
+    {
+        id: 14,
+        name: 'PostgreSQL',
+        cmds: [
+            'apt-get update -y',
+            'apt-get install -y postgresql postgresql-contrib phppgadmin',
+            'xdg-open https://www.howtoforge.com/tutorial/ubuntu-postgresql-installation/',
+        ]
+    },
+    {
+        id: 15,
+        name: 'pgadmin3',
+        cmds: [
+            'apt-get update -y',
+            'apt-get install -y pgadmin3',
+        ]
+    },
+    {
+        id: 16,
+        name: 'vagrant',
+        cmds: [
+            'apt-get -y update',
+            'apt-get -y install virtualbox',
+            'apt-get -y install vagrant',
+            'apt-get -y install virtualbox-dkms',
+        ]
+    },
 ];
 
 module.exports.getAll = function () {
