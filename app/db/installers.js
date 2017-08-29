@@ -151,7 +151,7 @@ let installers = [
     },
     {
         id: 15,
-        name: 'pgadmin3',
+        name: 'PgAdmin3',
         cmds: [
             'apt-get update -y',
             'apt-get install -y pgadmin3',
@@ -159,7 +159,7 @@ let installers = [
     },
     {
         id: 16,
-        name: 'vagrant',
+        name: 'Vagrant',
         cmds: [
             'apt-get -y update',
             'apt-get -y install virtualbox',
