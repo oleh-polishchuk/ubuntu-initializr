@@ -22,6 +22,11 @@ let installers = [
             'curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -',
             'apt-get install -y nodejs',
             'apt-get install -y build-essential'
+        ],
+        dependencies: [
+            {
+                id: 2
+            }
         ]
     },
     {
@@ -31,6 +36,11 @@ let installers = [
             'apt-get install -y g++',
             'apt-get install -y libkrb5-dev',
             'npm install -g grunt-cli',
+        ],
+        dependencies: [
+            {
+                id: 3
+            }
         ]
     },
     {
@@ -38,6 +48,11 @@ let installers = [
         name: 'Bower',
         cmds: [
             'npm install -g bower',
+        ],
+        dependencies: [
+            {
+                id: 3
+            }
         ]
     },
     {
@@ -46,6 +61,11 @@ let installers = [
         cmds: [
             'npm install -g gulpjs/gulp-cli',
             'npm install gulpjs/gulp#4.0 -D',
+        ],
+        dependencies: [
+            {
+                id: 3
+            }
         ]
     },
     {
@@ -56,6 +76,11 @@ let installers = [
             'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list',
             'apt-get update -y',
             'apt-get install -y yarn',
+        ],
+        dependencies: [
+            {
+                id: 2
+            }
         ]
     },
     {
