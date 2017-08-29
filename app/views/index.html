@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Dependencies -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -52,7 +53,10 @@
                 <label>Check for installers</label>
                 <form class="form-inline">
                     <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers">
-                        <label><input type="checkbox" ng-model="installer.checked"> {{installer.name}}</label>
+                        <label>
+                            <input type="checkbox" ng-model="installer.checked"
+                                   ng-change="vm.checkDependencies(installer, vm.installers)"> {{installer.name}}
+                        </label>
                     </div>
                 </form>
             </div>
@@ -86,7 +90,12 @@
 
 <footer class="start-footer">
     <div class="container">
-        <p>Copyright © 2017 Oleh Polishchuk, All Rights Reserved.</p>
+        <p>
+            Copyright © 2017 Oleh Polishchuk, All Rights Reserved.
+            <a href="https://www.linkedin.com/in/oleh-polishchuk-623547a8/">
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            </a>
+        </p>
     </div>
 </footer>
 
