@@ -19,6 +19,7 @@
         vm.uncheck = uncheck;
         vm.getChecked = getChecked;
         vm.isSomeChecked = isSomeChecked;
+        vm.checkDependencies = checkDependencies;
 
         activate();
 
@@ -77,6 +78,24 @@
             return list.filter(function (elem) {
                 return elem.checked
             }).length;
+        }
+
+        function checkDependencies(installer, installers) {
+            if (installer.dependencies && Array.isArray(installer.dependencies)) {
+                installer.dependencies.forEach(function (dependency) {
+                    var dependencyInstaller = findDependencyById(dependency.id, installers);
+                    if (!dependencyInstaller.checked) {
+                        dependencyInstaller.checked = true;
+                        checkDependencies(dependencyInstaller, installers);
+                    }
+                });
+            }
+        }
+
+        function findDependencyById(id, installers) {
+            return installers.find(function (elem) {
+                return elem.id === id
+            })
         }
     }
 
