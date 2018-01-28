@@ -4,6 +4,7 @@
   "description": "Web-app, that generate the installation bash-scripts for Ubuntu 14.04.",
   "main": "index.js",
   "scripts": {
+    "start": "pm2-dev start ../conf/dev/pm2.json",
     "pm2": "cd app && pm2 start server.js",
     "pm2-restart": "pm2 restart all",
     "pm2-stop": "pm2 stop all",
@@ -20,7 +21,10 @@
   },
   "homepage": "https://github.com/oleh-polishchuk/ubuntu-initializr#readme",
   "dependencies": {
-    "express": "^4.15.3",
+    "async": "^2.6.0",
+    "commander": "^2.13.0",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.1",
     "pm2": "^2.6.1",
     "serve-static": "^1.12.4"
   }
