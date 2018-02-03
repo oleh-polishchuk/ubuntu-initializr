@@ -1,6 +1,8 @@
 {
   "name": "UbuntuInitializer",
 
+  "bootstrap": "../conf/dev/bootstrap.json",
+
   "mongo": {
     "url": "mongodb://localhost:27017/ubuntu-initializer",
     "poolSize": 5
