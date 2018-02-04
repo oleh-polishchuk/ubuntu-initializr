@@ -30,7 +30,7 @@ exports.getByIds = (ids, cb) => {
         ids.forEach((id) => {
             tasks.push((function (id) {
                 return function (next) {
-                    Installer.find({_id: id}, next)
+                    Installer.findOne({_id: id}, next)
                 }
             })(id))
         });
