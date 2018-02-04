@@ -50,7 +50,7 @@
 
         function getIDs() {
             return vm.getChecked(vm.installers).reduce(function (ids, elem) {
-                return ids + '&id=' + elem.id
+                return ids + '&id=' + elem._id
             }, '');
         }
 

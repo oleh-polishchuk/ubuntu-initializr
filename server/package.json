@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2-dev start ../conf/dev/pm2.json",
-    "pm2": "cd app && pm2 start server.js",
-    "pm2-restart": "pm2 restart all",
-    "pm2-stop": "pm2 stop all",
+    "start:debug": "node --inspect=7474 app -c ../conf/dev/config.json -p 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

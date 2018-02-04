@@ -3,11 +3,7 @@ let generateBlock = function (installer) {
         `#       ${installer.name}       \n` +
         `#--------------------#\n`;
 
-    installer.cmds.forEach((cmd) => {
-        content += `${cmd}\n`
-    });
-
-    content += '\n\n';
+    content += `${installer.script}\n\n\n`;
 
     return content
 };
@@ -16,7 +12,8 @@ let generateScript = function (installers) {
     let content = '#!/bin/bash\n\n';
 
     installers.forEach((installer) => {
-        content += generateBlock(installer)
+        // TODO Polishchuk: check why mongo return model as array
+        content += generateBlock(installer[0])
     });
 
     return content
