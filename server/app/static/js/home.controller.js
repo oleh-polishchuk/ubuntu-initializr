@@ -7,11 +7,13 @@
         .controller('HomeController', HomeControllerClass);
 
     HomeControllerClass.$inject = ['$http', '$window'];
+
     function HomeControllerClass($http, $window) {
         var vm = this;
 
         vm.fileName = 'install';
         vm.installers = [];
+        vm.newInstaller = {};
 
         vm.getInstallers = getInstallers;
         vm.generateScript = generateScript;
@@ -20,6 +22,8 @@
         vm.getChecked = getChecked;
         vm.isSomeChecked = isSomeChecked;
         vm.checkDependencies = checkDependencies;
+        vm.addScript = addScript;
+        vm.isValidInstaller = isValidInstaller;
 
         activate();
 
@@ -57,7 +61,9 @@
         ////
 
         function checkFirst(list) {
-            list[0].checked = true;
+            if (Array.isArray(list) && list.length) {
+                list[0].checked = true;
+            }
         }
 
         function uncheck(installer) {
@@ -83,8 +89,8 @@
         function checkDependencies(installer, installers) {
             if (installer.dependencies && Array.isArray(installer.dependencies)) {
                 installer.dependencies.forEach(function (dependency) {
-                    var dependencyInstaller = findDependencyById(dependency.id, installers);
-                    if (!dependencyInstaller.checked) {
+                    var dependencyInstaller = findDependencyById(dependency._id, installers);
+                    if (dependencyInstaller && !dependencyInstaller.checked) {
                         dependencyInstaller.checked = true;
                         checkDependencies(dependencyInstaller, installers);
                     }
@@ -97,6 +103,20 @@
                 return elem.id === id
             })
         }
+
+        function addScript(newInstaller) {
+            $http.post('/api/installer', newInstaller).then((res) => {
+                if (res && res.data && res.data.success) {
+                    vm.newInstaller = {}
+                }
+            })
+        }
+
+        function isValidInstaller(newInstaller) {
+            return newInstaller && newInstaller.name && newInstaller.name.length
+                && newInstaller.script && newInstaller.script.length;
+        }
+
     }
 
 })();

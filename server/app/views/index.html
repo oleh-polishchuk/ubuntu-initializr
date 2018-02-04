@@ -35,41 +35,79 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <h2>Script metadata</h2>
-            <p>Note! *.sh extension will be added automatically</p>
-            <div class="form-group">
-                <label for="file-name">File name</label>
-                <input type="text" id="file-name" class="form-control" ng-model="vm.fileName"
-                       placeholder="ex. install.sh">
+    <div class="col-md-6 col-sm-12">
+        <h2>Script metadata</h2>
+        <p>Note! *.sh extension will be added automatically</p>
+        <div class="form-group">
+            <label for="file-name">File name</label>
+            <input type="text" id="file-name" class="form-control" ng-model="vm.fileName"
+                   placeholder="ex. install.sh">
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <h2>Installers</h2>
+        <p>Add installers to your Ubuntu</p>
+        <div class="form-group">
+            <label>Check for installers</label>
+            <form class="form-inline">
+                <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers">
+                    <label>
+                        <input type="checkbox" ng-model="installer.checked"
+                               ng-change="vm.checkDependencies(installer, vm.installers)"> {{installer.name}}
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="form-group">
+            <label>Added installers</label>
+            <div id="installers">
+                <div class="tag" ng-repeat="installer in vm.getChecked(vm.installers) track by $index">
+                    {{installer.name}}
+                    <button type="button" class="close" aria-label="Close"
+                            ng-click="vm.uncheck(installer)">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-sm-12">
-            <h2>Installers</h2>
-            <p>Add installers to your Ubuntu</p>
-            <div class="form-group">
-                <label>Check for installers</label>
-                <form class="form-inline">
-                    <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers">
-                        <label>
-                            <input type="checkbox" ng-model="installer.checked"
-                                   ng-change="vm.checkDependencies(installer, vm.installers)"> {{installer.name}}
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="form-group">
-                <label>Added installers</label>
-                <div id="installers">
-                    <div class="tag" ng-repeat="installer in vm.getChecked(vm.installers) track by $index">
-                        {{installer.name}}
-                        <button type="button" class="close" aria-label="Close"
-                                ng-click="vm.uncheck(installer)">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="text-center">
+                <button type="submit" id="generate-script" class="btn btn-success btn-lg"
+                        ng-disabled="!vm.isSomeChecked(vm.installers)"
+                        ng-click="vm.generateScript(vm.installers)">
+                    Generate Script
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <div class="tofullversion" ng-if="!vm.fullVersion">
+        <p>Don't know what to look for? Want more options?
+            <a href="#" ng-click="vm.fullVersion = true">Switch to the full version.</a></p>
+    </div>
+
+    <div class="tosimpleversion" ng-if="vm.fullVersion">
+        <p>Too many options? <a href="#" ng-click="vm.fullVersion = false">Switch back to the simple version.</a></p>
+    </div>
+
+    <div ng-if="vm.fullVersion">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h2>Add Installer</h2>
+                <div class="form-group">
+                    <label for="new-installer-name">Installer Name</label>
+                    <input type="text" id="new-installer-name" class="form-control" ng-model="vm.newInstaller.name"
+                           placeholder="ex. Git">
+                </div>
+                <div class="form-group">
+                    <label for="new-installer-script">Installer Script</label>
+                    <textarea name="new-installer-script" id="new-installer-script" cols="30" rows="3"
+                              class="form-control" ng-model="vm.newInstaller.script"
+                              placeholder="ex. apt-get install -y git"></textarea>
                 </div>
             </div>
         </div>
@@ -77,15 +115,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <p class="text-center">
-                    <button type="submit" id="generate-script" class="btn btn-success btn-lg"
-                            ng-disabled="!vm.isSomeChecked(vm.installers)"
-                            ng-click="vm.generateScript(vm.installers)">
-                        Generate Script
+                    <button type="submit" id="add-script" class="btn btn-success btn-lg"
+                            ng-disabled="!vm.isValidInstaller(vm.newInstaller)"
+                            ng-click="vm.addScript(vm.newInstaller)">
+                        Add Script
                     </button>
                 </p>
             </div>
         </div>
     </div>
+
 </div>
 
 <footer class="start-footer">

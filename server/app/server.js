@@ -1,4 +1,5 @@
 const path = require('path'),
+    bodyParser = require('body-parser'),
     express = require('express'),
     app = express();
 
@@ -8,6 +9,12 @@ const config = require('./config'),
 
 exports.init = (next) => {
     "use strict";
+
+    // body parser
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyParser.json());
 
     // routes
     app.use('/', index);

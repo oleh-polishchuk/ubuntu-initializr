@@ -15,6 +15,11 @@ router.get('/installer/all', (req, res) => {
     })
 });
 
+router.post('/installer', (req, res) => {
+    console.log(`Save new installer : ${JSON.stringify(req.body)}`);
+    res.send({success: true})
+});
+
 router.get('/script/generate', (req, res) => {
     let ids = Array.isArray(req.query.id) ? req.query.id : [req.query.id];
 
