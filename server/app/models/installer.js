@@ -4,8 +4,9 @@ const mongoose = require('mongoose'),
 const schema = new Schema({
     name: {type: String, required: true},
     description: {type: String},
+    script: {type: String, required: true},
+    approved: {type: Boolean},
     rating: {type: Number},
-    script: {type: String},
 
     dependencies: [{
         id: {type: Number}

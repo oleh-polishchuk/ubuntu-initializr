@@ -7,7 +7,9 @@ const Installer = require('../models/installer');
  * @param cb
  */
 exports.getAll = (cb) => {
-    Installer.find({}, (err, installers) => {
+    let query = {approved: true};
+
+    Installer.find(query, (err, installers) => {
         if (err) {
             console.error(`Can't get all installers: ${err}`);
             return cb(err)
@@ -38,4 +40,29 @@ exports.getByIds = (ids, cb) => {
 
 
     async.series(tasks, cb)
+};
+
+/**
+ * Method save instance of {@link Installer}
+ * @param installer
+ * @param cb
+ * @returns {*} saved instance of {@link Installer}
+ */
+exports.save = (installer, cb) => {
+    if (!installer || !installer.name || !installer.script) {
+        console.error('Installer or installer name not exist.');
+        return cb('Installer or installer name not exist.');
+    }
+
+    console.log(`Saving installer with name: ${installer.name} and script: ${installer.script}`);
+    installer.approved = !!installer.approved;
+    Installer.create(installer, (err, result) => {
+        if (err) {
+            console.error(`Installer ${installer} could not be saved.`);
+            return cb(`Installer ${installer} could not be saved.`);
+        }
+
+        console.log(`Successfully saved installer with name: ${result.name} id: ${result.id}`);
+        cb(null, result)
+    });
 };

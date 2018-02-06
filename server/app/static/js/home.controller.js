@@ -6,9 +6,9 @@
         .module('app', ['ui.bootstrap'])
         .controller('HomeController', HomeControllerClass);
 
-    HomeControllerClass.$inject = ['$http', '$window'];
+    HomeControllerClass.$inject = ['$http', '$window', 'InstallerService'];
 
-    function HomeControllerClass($http, $window) {
+    function HomeControllerClass($http, $window, InstallerService) {
         var vm = this;
 
         vm.fileName = 'install';
@@ -22,7 +22,7 @@
         vm.getChecked = getChecked;
         vm.isSomeChecked = isSomeChecked;
         vm.checkDependencies = checkDependencies;
-        vm.addScript = addScript;
+        vm.save = save;
         vm.isValidInstaller = isValidInstaller;
 
         activate();
@@ -39,9 +39,13 @@
          * Installers
          */
         function getInstallers(next) {
-            $http.get('/api/installer/all').then(function (res) {
-                vm.installers = res.data;
-                next()
+            InstallerService.get().then(res => {
+                if (res && res.data && res.data.success) {
+                    const response = res.data.data;
+                    console.log(`Successfully received ${response.installers.length} installers`);
+                    vm.installers = res.data.data.installers;
+                    next();
+                }
             })
         }
 
@@ -104,12 +108,18 @@
             })
         }
 
-        function addScript(newInstaller) {
-            $http.post('/api/installer', newInstaller).then((res) => {
-                if (res && res.data && res.data.success) {
-                    vm.newInstaller = {}
-                }
-            })
+        function save(installer) {
+            InstallerService.save(installer)
+                .then(res => {
+                    if (res && res.data && res.data.success) {
+                        console.log(`Successfully saved installer with id: ${res.data.data.installer._id}`);
+                        vm.newInstaller = {};
+                        vm.getInstallers(() => {
+                            vm.checkFirst(vm.installers);
+                        });
+                    }
+                })
+                .catch(err => console.error(err));
         }
 
         function isValidInstaller(newInstaller) {

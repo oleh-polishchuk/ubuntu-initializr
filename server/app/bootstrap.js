@@ -14,14 +14,8 @@ const bootstrapInstallers = (installer, cb) => {
             return cb();
         }
 
-        newInstaller = new Installer({
-            name: installer.name,
-            description: installer.description,
-            rating: installer.rating,
-            script: installer.script.join('\n'),
-            dependencies: installer.dependencies
-        });
-
+        newInstaller = new Installer(installer);
+        newInstaller.script = installer.script.join('\n');
         newInstaller.save(cb);
     });
 };

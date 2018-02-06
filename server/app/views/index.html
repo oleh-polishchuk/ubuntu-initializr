@@ -24,6 +24,7 @@
     <!-- App -->
     <link rel="stylesheet" href="css/app.css">
     <script src="js/home.controller.js"></script>
+    <script src="js/installer.service.js"></script>
 </head>
 <body ng-app="app" ng-controller="HomeController as vm">
 
@@ -124,7 +125,7 @@
                 <p class="text-center">
                     <button type="submit" id="add-script" class="btn btn-success btn-lg"
                             ng-disabled="!vm.isValidInstaller(vm.newInstaller)"
-                            ng-click="vm.addScript(vm.newInstaller)">
+                            ng-click="vm.save(vm.newInstaller)">
                         Add Script
                     </button>
                 </p>

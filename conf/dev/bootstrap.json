@@ -8,7 +8,8 @@
         "apt-get update -y",
         "apt-get install -y git"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "Curl",
@@ -18,7 +19,8 @@
         "apt-get update -y",
         "apt-get install -y curl"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "NodeJS",
@@ -29,7 +31,12 @@
         "apt-get install -y nodejs",
         "apt-get install -y build-essential"
       ],
-      "dependencies": [ { "id": 2 } ]
+      "approved": true,
+      "dependencies": [
+        {
+          "id": 2
+        }
+      ]
     },
     {
       "name": "Grunt",
@@ -40,14 +47,24 @@
         "apt-get install -y libkrb5-dev",
         "npm install -g grunt-cli"
       ],
-      "dependencies": [ { "id": 3 } ]
+      "approved": true,
+      "dependencies": [
+        {
+          "id": 3
+        }
+      ]
     },
     {
       "name": "Bower",
       "description": "",
       "rating": 0,
-      "script": [ "npm install -g bower" ],
-      "dependencies": [ { "id": 3 }
+      "script": [
+        "npm install -g bower"
+      ],
+      "dependencies": [
+        {
+          "id": 3
+        }
       ]
     },
     {
@@ -58,7 +75,12 @@
         "npm install -g gulpjs/gulp-cli",
         "npm install gulpjs/gulp#4.0 -D"
       ],
-      "dependencies": [ { "id": 3 } ]
+      "approved": true,
+      "dependencies": [
+        {
+          "id": 3
+        }
+      ]
     },
     {
       "name": "Yarn",
@@ -70,7 +92,12 @@
         "apt-get update -y",
         "apt-get install -y yarn"
       ],
-      "dependencies": [ { "id": 2 } ]
+      "approved": true,
+      "dependencies": [
+        {
+          "id": 2
+        }
+      ]
     },
     {
       "name": "Java",
@@ -82,7 +109,8 @@
         "apt-get install -y oracle-java8-installer",
         "java -version"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "Gradle",
@@ -93,7 +121,8 @@
         "apt-get update -y",
         "apt-get install -y gradle"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "Maven",
@@ -105,14 +134,17 @@
         "apt-get update -y",
         "apt-get install -y maven3"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "Wine",
       "description": "",
       "rating": 0,
-      "script": [ "apt-get install -y wine" ],
-      "dependencies": [ ]
+      "script": [
+        "apt-get install -y wine"
+      ],
+      "dependencies": []
     },
     {
       "name": "MySQL",
@@ -124,7 +156,8 @@
         "mysql_secure_installation",
         "systemctl status mysql.service"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "MongoDB",
@@ -137,7 +170,8 @@
         "apt-get install -y mongodb-org",
         "xdg-open https://www.digitalocean.com/community/tutorials/mongodb-ubuntu-16-04-ru"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "PostgreSQL",
@@ -148,7 +182,8 @@
         "apt-get install -y postgresql postgresql-contrib phppgadmin",
         "xdg-open https://www.howtoforge.com/tutorial/ubuntu-postgresql-installation/"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "PgAdmin3",
@@ -158,7 +193,8 @@
         "apt-get update -y",
         "apt-get install -y pgadmin3"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     },
     {
       "name": "Vagrant",
@@ -170,7 +206,8 @@
         "apt-get -y install vagrant",
         "apt-get -y install virtualbox-dkms"
       ],
-      "dependencies": [ ]
+      "approved": true,
+      "dependencies": []
     }
   ]
 }
