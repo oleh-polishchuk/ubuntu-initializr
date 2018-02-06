@@ -7,14 +7,21 @@
     <link rel="icon" type="image/png" href="https://assets.ubuntu.com/v1/cb22ba5d-favicon-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Dependencies -->
+    <!-- Font Awesome & Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery & Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Angular 1.5 -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
-    <!-- Application -->
+    <!-- Angular UI Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- App -->
     <link rel="stylesheet" href="css/app.css">
     <script src="js/home.controller.js"></script>
 </head>
@@ -51,7 +58,7 @@
         <div class="form-group">
             <label>Check for installers</label>
             <form class="form-inline">
-                <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers">
+                <div class="checkbox installer-checkbox" ng-repeat="installer in vm.installers" uib-tooltip="{{ installer.script }}">
                     <label>
                         <input type="checkbox" ng-model="installer.checked"
                                ng-change="vm.checkDependencies(installer, vm.installers)"> {{installer.name}}

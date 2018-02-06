@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app', [])
+        .module('app', ['ui.bootstrap'])
         .controller('HomeController', HomeControllerClass);
 
     HomeControllerClass.$inject = ['$http', '$window'];
