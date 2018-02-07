@@ -2,51 +2,44 @@ const express = require('express'),
     router = express.Router();
 
 const ScriptService = require('../services/script.service'),
-    InstallerService = require('../services/installer.service');
+    ErrorConstants = require('../constants/error.constats'),
+    InstallerService = require('../services/installer.service'),
+    ResponseService = require('../services/response.service');
 
 router.get('/installer', (req, res) => {
     InstallerService.getAll((err, installers) => {
         if (err) {
-            console.error(err);
-            res.status(500).send(err)
+            return ResponseService.error(res, err);
         }
 
-        res.send({
-            success: true,
-            data: {
-                installers: installers
-            }
-        })
+        ResponseService.success(res, {
+            installers: installers
+        });
     })
 });
 
 router.post('/installer', (req, res) => {
     if (!req.body || !req.body.name || !req.body.script) {
-        console.error('Installer or field name or script not exist.');
-        return res
-            .status(500)
-            .send('Installer or field name or script not exist.')
+        return ResponseService.error(res, ErrorConstants.INSTALLER_SAVE_ERROR_MESSAGE);
     }
 
     InstallerService.save(req.body, (err, installer) => {
         if (err) {
-            console.error(err);
-            return res
-                .status(500)
-                .send(err);
+            return ResponseService.error(res, err);
         }
 
-        res.send({
-            success: true,
-            data: {
-                installer: installer
-            }
-        })
+        ResponseService.success(res, {
+            installer: installer
+        });
     })
 });
 
-router.get('/script/generate', (req, res) => {
-    let ids = Array.isArray(req.query.id) ? req.query.id : [req.query.id];
+router.get('/script/download', (req, res) => {
+    if (!req.query.id) {
+        return ResponseService.error(res, ErrorConstants.SCRIPT_DOWNLOAD_ERROR_MESSAGE);
+    }
+
+    let ids = Array.isArray(req.query.id) ? req.query.id : [ req.query.id ];
 
     InstallerService.getByIds(ids, (err, installers) => {
         let content = ScriptService.generateScript(installers);
