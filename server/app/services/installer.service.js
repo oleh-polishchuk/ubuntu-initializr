@@ -7,7 +7,7 @@ const Installer = require('../models/installer');
  * @param cb
  */
 exports.getAll = (cb) => {
-    let query = {approved: true};
+    let query = { approved: true };
 
     Installer.find(query, (err, installers) => {
         if (err) {
@@ -32,7 +32,7 @@ exports.getByIds = (ids, cb) => {
         ids.forEach((id) => {
             tasks.push((function (id) {
                 return function (next) {
-                    Installer.findOne({_id: id}, next)
+                    Installer.findOne({ _id: id }, next)
                 }
             })(id))
         });

@@ -6,7 +6,7 @@
         .module('app')
         .service('InstallerService', InstallerService);
 
-    InstallerService.$inject = ['$http'];
+    InstallerService.$inject = [ '$http' ];
 
     function InstallerService($http) {
 

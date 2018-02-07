@@ -4,7 +4,7 @@ const Installer = require('./models/installer'),
     config = require('./config');
 
 const bootstrapInstallers = (installer, cb) => {
-    Installer.findOne({name: installer.name}, (err, newInstaller) => {
+    Installer.findOne({ name: installer.name }, (err, newInstaller) => {
         if (err) {
             cb(err)
         }

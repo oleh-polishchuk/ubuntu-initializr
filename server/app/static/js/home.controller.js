@@ -3,10 +3,10 @@
     'use strict';
 
     angular
-        .module('app', ['ui.bootstrap'])
+        .module('app', [ 'ui.bootstrap' ])
         .controller('HomeController', HomeControllerClass);
 
-    HomeControllerClass.$inject = ['$http', '$window', 'InstallerService'];
+    HomeControllerClass.$inject = [ '$http', '$window', 'InstallerService' ];
 
     function HomeControllerClass($http, $window, InstallerService) {
         var vm = this;
@@ -66,7 +66,7 @@
 
         function checkFirst(list) {
             if (Array.isArray(list) && list.length) {
-                list[0].checked = true;
+                list[ 0 ].checked = true;
             }
         }
 
