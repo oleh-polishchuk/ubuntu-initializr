@@ -1,6 +1,7 @@
 const async = require('async');
 
 const Installer = require('../models/installer');
+const TelegramService = require('../services/telegram.service');
 
 /**
  * Method return list of the instances of {@link Installer}
@@ -63,6 +64,8 @@ exports.save = (installer, cb) => {
         }
 
         console.log(`Successfully saved installer with name: ${result.name} id: ${result.id}`);
+        TelegramService.asyncSendMessage(`New installer was added: "${result.name}"`);
+
         cb(null, result)
     });
 };

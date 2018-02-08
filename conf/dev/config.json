@@ -6,5 +6,17 @@
   "mongo": {
     "url": "mongodb://localhost:27017/ubuntu-initializer",
     "poolSize": 5
+  },
+
+  "telegram": {
+    "api": "https://api.telegram.org",
+    "token": "482971274:AAH1FRn209-nWPVd_MLsQCVfcBlCbmk_DSo",
+    "chat": {
+      "id": -282857573,
+      "title": "Ubuntu Initializer Channel",
+      "type": "group",
+      "all_members_are_administrators": true
+    }
   }
+
 }
