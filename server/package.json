@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2-dev start ../conf/dev/pm2.json",
     "start:debug": "node --inspect=7474 app -c ../conf/dev/config.json -p 8080",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node spec"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,9 @@
     "mongoose": "^5.0.1",
     "pm2": "^2.6.1",
     "serve-static": "^1.12.4"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "request": "^2.83.0"
   }
 }
